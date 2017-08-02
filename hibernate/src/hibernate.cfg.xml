@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		
+		<!-- 必选配置   mysql方言选择最短的
+			#hibernate.dialect org.hibernate.dialect.MySQLDialect
+			#hibernate.dialect org.hibernate.dialect.MySQLInnoDBDialect
+			#hibernate.dialect org.hibernate.dialect.MySQLMyISAMDialect
+			
+			#hibernate.connection.driver_class com.mysql.jdbc.Driver
+			#hibernate.connection.url jdbc:mysql:///test
+			#hibernate.connection.username gavin
+			#hibernate.connection.password
+		
+		-->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///struts</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<!-- hibernate方言配置
+				不同的数据库产品都会符合sql99标准.
+				但是不同的数据库都会在sql99标准的基础上扩展一些语法出来.
+				不同的数据库扩展出来的语法是不同的.这些就是数据库方言. 例如: limit是方言
+		 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- 可选配置
+				//将生成sql语句输出到控制台显示
+				hibernate.show_sql true
+				//将sql语句进行格式化
+				hibernate.format_sql true
+				
+				## auto schema export 自动建表
+				#hibernate.hbm2ddl.auto create (测试环境)			自动建表.每次hibernate启动时都会自动建表.原有表中数据会丢失
+				#hibernate.hbm2ddl.auto create-drop(测试环境)     自动建表.每次hibernate启动时都会自动建表.运行结束会将表删除.
+				#hibernate.hbm2ddl.auto update(常用)				自动建表.如果表已经存在,会直接使用.如果现有表结果与映射配置不一致.
+																	        会自动修改表结构.
+				#hibernate.hbm2ddl.auto validate				不会自动建表.检查表结构是否与映射文件匹配.不匹配启动时会抛出异常.
+		 -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- c3p0连接池配置
+				1.导包
+				2.配置使用c3p0连接池
+						hibernate.connection.provider_class org.hibernate.connection.C3P0ConnectionProvider
+				3.配置c3p0连接池本身的参数
+						#hibernate.c3p0.max_size 2
+						#hibernate.c3p0.min_size 2
+						#hibernate.c3p0.timeout 5000
+		 -->
+		 <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		
+		 <property name="hibernate.c3p0.max_size">2</property>
+		 <property name="hibernate.c3p0.min_size">2</property>
+		 <property name="hibernate.c3p0.timeout">5000</property>
+		 
+		 <!-- 修改数据库隔离级别 
+		 	## specify a JDBC isolation level
+			#hibernate.connection.isolation 4
+		 -->
+		 <property name="hibernate.connection.isolation">4</property>
+		<!-- 指定session与当前线程绑定 
+				thread: 与当前线程
+				JTA: JTA事务绑定
+				managed:手动指定交给某个事务管理类来管理
+		-->
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<!-- 映射文件引入-->
+		<mapping resource="com/itheima/user/User.hbm.xml" />
+	
+	</session-factory>	
+</hibernate-configuration>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <!-- 完成实体类和数据表的映射 -->
+    <hibernate-mapping>
+    	<!-- 类 与表的映射
+    		name  类名
+    		table  表名
+    		catalog  数据库名
+    	 -->
+    	<class name="com.itheima.user.User" table="user" catalog="struts">
+    		<!-- 类中属性 与表中数据列 的映射
+    			主键
+    				name  属性名
+    				column 列名
+    				type  类型
+    		 -->
+			<id name="id" column="id" type="int">
+				<!-- 主键策略  identity 主键自增 -->
+				<generator class="native"></generator>
+			</id>    		
+			<!-- 普通属性 -->
+			<property name="username" column="USERNAME" type="string"></property>
+			<property name="password" column="PASSWORD" type="string"></property>
+			<property name="hobby" column="HOBBY" type="string"></property>
+			
+			    		
+    	</class>
+    
+    <!-- 在配置文件中 定义SQL，给SQL命名，在程序通过login 使用SQL -->
+	<!-- <sql-query name="login">
+		<![CDATA[select * from user where username= ? and password =?]]>
+	</sql-query> -->
+    
+    </hibernate-mapping>
+   
